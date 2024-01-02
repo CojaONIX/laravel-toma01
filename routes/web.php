@@ -25,6 +25,8 @@ Route::get('/contact', function () {
     echo "Hello world - contact";
 });
 
+Route::view('/contact2', 'contact2');
+
 // Vezba 01
 // Route::get('/about', function () {
 //     echo "Moj prvi sajt";
