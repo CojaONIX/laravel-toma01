@@ -13,26 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
+
+// Route::view('/contact2', 'contact2');
 
 Route::get('/', function () {
-    echo "Hello world";
+    return view('home');
+});
+
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/shop', function () {
+    return view('shop');
 });
 
 Route::get('/contact', function () {
-    echo "Hello world - contact";
-});
-
-Route::view('/contact2', 'contact2');
-
-// Vezba 01
-// Route::get('/about', function () {
-//     echo "Moj prvi sajt";
-// });
-
-// Vezba 02
-Route::get('/about', function () {
-    return view('about');
+    return view('contact');
 });
