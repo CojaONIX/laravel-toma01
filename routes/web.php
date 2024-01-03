@@ -17,20 +17,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-// Route::view('/contact2', 'contact2');
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::view('/', 'home');
 
-Route::get('/about', function () {
-    return view('about');
-});
+Route::view('/about', 'about');
 
-Route::get('/shop', function () {
-    return view('shop');
-});
+Route::view('/shop', 'shop');
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::view('/contact', 'contact');
