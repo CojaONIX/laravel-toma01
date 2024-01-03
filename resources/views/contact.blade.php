@@ -27,36 +27,8 @@
                 <button class="btn btn-outline-primary col-12 my-3" type="submit">Send</button>
             </form>
         </div>
-        <div id="myMap" class="col-6" style="border:1px solid black; height: 400px;"></div>
+
+        <iframe class="col-6" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46265.40050177258!2d21.672333980473038!3d43.552639209297766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47542d9634f80db1%3A0x73930c5060f43810!2z0JDQu9C10LrRgdC40L3QsNGG!5e0!3m2!1ssr!2srs!4v1704305868856!5m2!1ssr!2srs" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
     </div>
-@endsection
-
-@section('js')
-    <script>
-
-        function myMap() {
-            var mapCanvas = document.getElementById("myMap");
-            var myCenter = new google.maps.LatLng(43.53787540426466, 21.700925189985583);
-
-            var mapOptions = {
-                mapTypeId: google.maps.MapTypeId.ROADMAP, // ROADMAP | TERRAIN | SATELLITE | HYBRID
-                center: myCenter,
-                zoom: 12,
-                disableDefaultUI: true,
-                panControl: true,
-                zoomControl: true,
-                fullscreenControl: true,
-                //fullscreenControlOptions: {index: 100, position: google.maps.ControlPosition.RIGHT_TOP},		
-                mapTypeControl: false,
-                scaleControl: false,
-                streetViewControl: false,
-                overviewMapControl: false,
-                rotateControl: false  
-            };
-            var map = new google.maps.Map(mapCanvas, mapOptions);
-            marker = new google.maps.Marker({position: myCenter, map: map});
-        }
-
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOM3JgjQqCsQGClTP3QVIcbWIcCkuEKog&callback=myMap"></script>
 @endsection
