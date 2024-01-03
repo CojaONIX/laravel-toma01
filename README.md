@@ -15,9 +15,14 @@
 - php artisan view:clear
 - php artisan route:list
 - php artisan make:controller NameController
+- php artisan make:migration create_products_table
+- php artisan migrate
+- php artisan make:model Product
 
 ## Exercises 01
 [The Route List](https://laravel.com/docs/10.x/routing#the-route-list)
+[Migrations](https://laravel.com/docs/10.x/migrations#introduction)
+[Models](https://laravel.com/docs/10.x/eloquent#introduction)
 
 ## About Laravel
 
