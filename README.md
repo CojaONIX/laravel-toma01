@@ -14,6 +14,7 @@
 - php artisan cache:clear
 - php artisan view:clear
 - php artisan route:list
+- php artisan make:controller NameController
 
 ## Exercises 01
 [The Route List](https://laravel.com/docs/10.x/routing#the-route-list)
