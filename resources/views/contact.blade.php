@@ -7,7 +7,10 @@
     <title>Contact</title>
 </head>
 <body>
-    <h1>Contact</h1>
     @include('navigation')
+    
+    <h1>Contact</h1>
+
+    @include('footer')
 </body>
 </html>
