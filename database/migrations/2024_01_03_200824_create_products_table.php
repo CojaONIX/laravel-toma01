@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 64);
             $table->text('description');
-            $table->unsignedInteger('amount')->default(0);
-            $table->float('price')->default(0);
+            $table->unsignedInteger('amount');
+            $table->float('price');
             $table->string('image')->nullable();
             $table->timestamps();
         });

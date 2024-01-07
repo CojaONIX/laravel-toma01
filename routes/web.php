@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,11 +24,16 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/', [\App\Http\Controllers\HomepageController::class, 'index']);
-Route::get('/shop', [\App\Http\Controllers\ShopController::class, 'index']);
-Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index']);
-Route::post('/send-contact', [\App\Http\Controllers\ContactController::class, 'sendContact']);
+Route::get('/', [HomepageController::class, 'index']);
+Route::get('/shop', [ShopController::class, 'index']);
 
-Route::get('/admin/all-contacts', [\App\Http\Controllers\ContactController::class, 'getAllContacts']);
+Route::get('/contact', [ContactController::class, 'index']);
+Route::post('/send-contact', [ContactController::class, 'sendContact']);
+Route::get('/admin/all-contacts', [ContactController::class, 'getAllContacts']);
+
+Route::get('/admin/all-products', [ProductController::class, 'getAllProducts']);
+Route::get('/admin/add-product', [ProductController::class, 'addProductForm']);
+Route::post('/admin/add-product', [ProductController::class, 'createProduct']);
+Route::delete('/admin/delete-product/{id}', [ProductController::class, 'deleteProduct']);
 
 Route::view('/about', 'about');

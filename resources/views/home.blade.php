@@ -50,7 +50,11 @@
         <div class="card-group">
             <div class="card">
                 <div class="card-header">
-                    <img src="{{ $product->image }}" class="card-img-top" alt="...">
+                    @if($product->image)
+                        <img src="{{ $product->image }}" class="card-img-top">
+                    @else
+                        <img src="https://picsum.photos/id/{{ $product->id }}/300/100.jpg" class="card-img-top">
+                    @endif
                 </div>
     
                 <div class="card-body">
