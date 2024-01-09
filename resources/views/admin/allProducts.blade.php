@@ -3,16 +3,16 @@
 @section('title', 'Admin - allProducts')
 
 @section('content')
-    
+
     <div class="d-flex justify-content-between align-items-start">
-        <a href="/admin/add-product" class="btn btn-primary mb-5">New Product</a>
+        <a href="{{ route('admin.add.product.page') }}" class="btn btn-primary mb-5">New Product</a>
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{session('success')}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        @endif 
+        @endif
     </div>
 
     <table class="table">
@@ -38,7 +38,7 @@
                 <td>{{ $product->created_at }}</td>
                 <td>{{ $product->updated_at }}</td>
                 <td>
-                    <form method="post" action="/admin/delete-product/{{$product->id}}">
+                    <form method="post" action="{{ route('admin.delete.product', ['id'=>$product->id]) }}">
                         @csrf
                         @method('delete')
                         <button class="btn btn-outline-danger" type="submit">Delete</button>
@@ -47,5 +47,5 @@
             </tr>
         @endforeach
     </table>
-    
+
 @endsection

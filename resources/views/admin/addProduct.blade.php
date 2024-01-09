@@ -1,12 +1,12 @@
 @extends('layout')
 
-@section('title', 'Admin - addProducts')
+@section('title', 'Admin - addProduct')
 
 @section('content')
 
 <div class="row">
     <div class="col-8">
-        <form method="POST" action="/admin/add-product">
+        <form method="POST" action="{{ route('admin.create.product') }}">
             @csrf
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="name" name="name" placeholder="Name:" autofocus value="{{ old('name') }}">
@@ -65,8 +65,8 @@
                 {{session('success')}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        @endif   
+        @endif
 
     </div>
-    
+
 @endsection

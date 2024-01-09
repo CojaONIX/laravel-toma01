@@ -24,16 +24,25 @@ use App\Http\Controllers\ProductController;
 // });
 
 
-Route::get('/', [HomepageController::class, 'index']);
-Route::get('/shop', [ShopController::class, 'index']);
+Route::get('/', [HomepageController::class, 'index'])->name('homePage');
+Route::get('/shop', [ShopController::class, 'index'])->name('shopPage');
+Route::view('/about', 'about')->name('aboutPage');
 
-Route::get('/contact', [ContactController::class, 'index']);
-Route::post('/send-contact', [ContactController::class, 'sendContact']);
-Route::get('/admin/all-contacts', [ContactController::class, 'getAllContacts']);
+Route::controller(ContactController::class)->group(function () {
+    Route::get('/contact', 'index')->name('contactPage');
+    Route::post('/send-contact', 'sendContact')->name('sendContact');
+});
 
-Route::get('/admin/all-products', [ProductController::class, 'getAllProducts']);
-Route::get('/admin/add-product', [ProductController::class, 'addProductForm']);
-Route::post('/admin/add-product', [ProductController::class, 'createProduct']);
-Route::delete('/admin/delete-product/{id}', [ProductController::class, 'deleteProduct']);
+Route::name('admin.')->prefix('/admin')->group(function () {
+    Route::controller(ContactController::class)->group(function () {
+        Route::get('/all-contacts', 'getAllContacts')->name('all.contacts');
+        Route::get('/delete-contact/{id}', 'deleteContact')->name('delete.contact');
+    });
 
-Route::view('/about', 'about');
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/all-products', 'getAllProducts')->name('all.products');
+        Route::get('/add-product', 'addProductForm')->name('add.product.page');
+        Route::post('/add-product', 'createProduct')->name('create.product');
+        Route::delete('/delete-product/{id}', 'deleteProduct')->name('delete.product');
+    });
+});

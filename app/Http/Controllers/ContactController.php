@@ -32,7 +32,13 @@ class ContactController extends Controller
             'message' => $request->message
         ]);
 
-      
-        return redirect('/contact')->withSuccess('Contact is created.');
+        return redirect()->route('contactPage')->withSuccess('Contact is created.');
+    }
+
+    public function deleteContact($id)
+    {
+        $contact = ContactModel::findOrFail($id);
+        $contact->delete();
+        return redirect()->back();
     }
 }

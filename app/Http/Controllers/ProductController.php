@@ -15,7 +15,7 @@ class ProductController extends Controller
 
     public function addProductForm()
     {
-        return view('admin.addProducts');
+        return view('admin.addProduct');
     }
 
     public function createProduct(Request $request)
@@ -37,7 +37,7 @@ class ProductController extends Controller
             'image' => $request->image
         ]);
 
-        return redirect('/admin/all-products')->withSuccess('Product is created.');
+        return redirect()->route('admin.all.products')->withSuccess('Product is created.');
 
     }
 
@@ -47,6 +47,6 @@ class ProductController extends Controller
         $products = Product::findOrFail($id);
         $products->delete();
 
-        return redirect('/admin/all-products')->withSuccess('Product is deleted.');
+        return redirect()->route('admin.all.products')->withSuccess('Product is deleted.');
     }
 }

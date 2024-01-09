@@ -16,6 +16,7 @@
 - php artisan route:list
 - php artisan make:controller NameController
 - php artisan make:migration create_products_table
+- php artisan make:migration add_role_to_users
 - php artisan migrate
 - php artisan make:model Product
 

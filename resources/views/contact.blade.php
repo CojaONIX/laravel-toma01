@@ -1,14 +1,14 @@
 @extends('layout')
 
 @section('title', 'Contact')
- 
+
 @section('content')
 
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni deleniti porro tenetur est ad fugiat, aspernatur optio maxime laudantium cupiditate totam cum consequuntur nam non natus dolorem. Aperiam sit deserunt eos voluptatum, dignissimos excepturi corporis sunt facilis voluptatem ducimus esse omnis exercitationem consequuntur obcaecati iure aliquid ipsam? Eaque, corrupti. Et, minima iure esse impedit itaque dignissimos magnam mollitia consectetur inventore ex nesciunt quod totam repudiandae ut iusto. Dicta maiores fugiat suscipit asperiores animi veniam voluptatibus voluptatem voluptate laboriosam necessitatibus, ullam ipsa. Quaerat, nesciunt eius consequuntur, inventore odio ea ex saepe iusto dolores nihil repellendus tempora quae ducimus? Cupiditate, fugit illum!</p>
-    
+
     <div class="row">
         <div class="col-6">
-            <form method="POST" action="/send-contact">
+            <form method="POST" action="{{ route('sendContact') }}">
                 @csrf
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="email" name="email" placeholder="Email:" autofocus value="">
@@ -17,14 +17,14 @@
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject:" value="">
-                    <label for="name">Subject:</label>
+                    <label for="subject">Subject:</label>
                 </div>
 
                 <div class="form-floating mb-3">
                     <textarea class="form-control" placeholder="Message:" id="message" name="message" style="height: 200px"></textarea>
                     <label for="message">Message:</label>
                 </div>
-                
+
                 <button class="btn btn-outline-primary col-12 my-3" type="submit">Send</button>
             </form>
 
@@ -43,7 +43,7 @@
                     {{session('success')}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            @endif   
+            @endif
 
         </div>
 
