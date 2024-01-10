@@ -20,17 +20,19 @@ class ContactController extends Controller
 
     public function sendContact(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'email' => 'required|string|max:64',
             'subject' => 'required|string',
             'message' => 'required|string|min:5'
         ]);
 
-        ContactModel::create([
-            'email' => $request->email,
-            'subject' => $request->subject,
-            'message' => $request->message
-        ]);
+        ContactModel::create($validated);
+
+        //ContactModel::create([
+        //    'email' => $request->get('email'),
+        //    'subject' => $request->get('subject'),
+        //    'message' => $request->get('message')
+        //]);
 
         return redirect()->route('contactPage')->withSuccess('Contact is created.');
     }

@@ -38,7 +38,7 @@
                 <td>{{ $product->created_at }}</td>
                 <td>{{ $product->updated_at }}</td>
                 <td>
-                    <form method="post" action="{{ route('admin.delete.product', ['id'=>$product->id]) }}">
+                    <form method="post" action="{{ route('admin.delete.product', ['product'=>$product->id]) }}">
                         @csrf
                         @method('delete')
                         <button class="btn btn-outline-danger" type="submit">Delete</button>

@@ -36,13 +36,13 @@ Route::controller(ContactController::class)->group(function () {
 Route::name('admin.')->prefix('/admin')->group(function () {
     Route::controller(ContactController::class)->group(function () {
         Route::get('/all-contacts', 'getAllContacts')->name('all.contacts');
-        Route::get('/delete-contact/{id}', 'deleteContact')->name('delete.contact');
+        Route::get('/delete-contact/{contact}', 'deleteContact')->name('delete.contact');
     });
 
     Route::controller(ProductController::class)->group(function () {
         Route::get('/all-products', 'getAllProducts')->name('all.products');
         Route::get('/add-product', 'addProductForm')->name('add.product.page');
         Route::post('/add-product', 'createProduct')->name('create.product');
-        Route::delete('/delete-product/{id}', 'deleteProduct')->name('delete.product');
+        Route::delete('/delete-product/{product}', 'deleteProduct')->name('delete.product');
     });
 });

@@ -11,17 +11,17 @@
             <form method="POST" action="{{ route('sendContact') }}">
                 @csrf
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email:" autofocus value="">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email:" autofocus value="{{ old('email') }}">
                     <label for="email">Email:</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject:" value="">
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject:" value="{{ old('subject') }}">
                     <label for="subject">Subject:</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <textarea class="form-control" placeholder="Message:" id="message" name="message" style="height: 200px"></textarea>
+                    <textarea class="form-control" placeholder="Message:" id="message" name="message" style="height: 200px">{{ old('message') }}</textarea>
                     <label for="message">Message:</label>
                 </div>
 

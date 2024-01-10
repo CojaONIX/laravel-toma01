@@ -21,20 +21,19 @@ class ProductController extends Controller
     public function createProduct(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:64',
+            'name' => 'required|string|max:64|unique:products',
             'description' => 'required|string',
-            'amount' => 'required',
-            'price' => 'required|numeric',
+            'amount' => 'required|int|min:0',
+            'price' => 'required|numeric|min:0',
             'image' => 'nullable'
         ]);
 
-
         Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'amount' => $request->amount,
-            'price' => $request->price,
-            'image' => $request->image
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'amount' => $request->get('amount'),
+            'price' => $request->get('price'),
+            'image' => $request->get('image')
         ]);
 
         return redirect()->route('admin.all.products')->withSuccess('Product is created.');

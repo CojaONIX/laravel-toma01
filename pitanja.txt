@@ -1,8 +1,0 @@
-1. Koje su razlike izmedju:
-dd($request->input('email'));
-dd($request->get('email'));
-dd($request->email);
-
-2. https://laravel.com/docs/10.x/eloquent#inserts
-new ili create?
-

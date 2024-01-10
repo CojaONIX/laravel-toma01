@@ -21,7 +21,7 @@
                 <td>{{ $contact->message }}</td>
                 <td>{{ $contact->created_at }}</td>
                 <td>{{ $contact->updated_at }}</td>
-                <td><a href="{{ route('admin.delete.contact', ['id' => $contact->id]) }}" class="btn btn-outline-danger">Delete</a></td>
+                <td><a href="{{ route('admin.delete.contact', ['contact' => $contact->id]) }}" class="btn btn-outline-danger">Delete</a></td>
             </tr>
         @endforeach
     </table>
