@@ -13,7 +13,7 @@ class ProductController extends Controller
         return view('admin.allProducts', compact('products'));
     }
 
-    public function addProductForm()
+    public function addProductPage()
     {
         return view('admin.addProduct');
     }
@@ -47,5 +47,34 @@ class ProductController extends Controller
         $products->delete();
 
         return redirect()->route('admin.all.products')->withSuccess('Product is deleted.');
+    }
+
+    public function editProductPage($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('admin.editProduct', compact('product'));
+    }
+
+    public function updateProduct(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:64',
+            'description' => 'required|string',
+            'amount' => 'required|int|min:0',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable'
+        ]);
+
+        $product = Product::findOrFail($id);
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->amount = $request->amount;
+        $product->price = $request->price;
+        $product->image = $request->image;
+
+        $product->save();
+
+        return redirect()->route('admin.all.products')->withSuccess('Product ' . $product->id . ' is edited.');
     }
 }

@@ -3,6 +3,7 @@
 @section('title', 'Admin - allContacts')
 
 @section('content')
+
     <table class="table">
         <tr>
             <th>id</th>
@@ -21,9 +22,18 @@
                 <td>{{ $contact->message }}</td>
                 <td>{{ $contact->created_at }}</td>
                 <td>{{ $contact->updated_at }}</td>
-                <td><a href="{{ route('admin.delete.contact', ['contact' => $contact->id]) }}" class="btn btn-outline-danger">Delete</a></td>
+                <td>
+                    <a href="{{ route('admin.delete.contact', ['contact' => $contact->id]) }}" class="btn btn-outline-danger">Delete</a>
+                    <a href="{{ route('admin.edit.contact.page', ['contact' => $contact->id]) }}" class="btn btn-outline-primary">Edit</a>
+                </td>
             </tr>
         @endforeach
     </table>
 
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{session('success')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 @endsection
