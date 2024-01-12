@@ -19,36 +19,34 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-// Route::get('/welcome', function () {
-//     return view('welcome');
-// });
+ Route::get('/welcome', function () {
+     return view('welcome');
+ });
 
 
-Route::get('/', [HomepageController::class, 'index'])->name('homePage');
-Route::get('/shop', [ShopController::class, 'index'])->name('shopPage');
-Route::view('/about', 'about')->name('aboutPage');
+Route::get('/', [HomepageController::class, 'index'])->name('home.page');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.page');
+Route::view('/about', 'about')->name('about.page');
 
 Route::controller(ContactController::class)->group(function () {
-    Route::get('/contact', 'index')->name('contactPage');
-    Route::post('/send-contact', 'sendContact')->name('sendContact');
+    Route::get('/contact', 'index')->name('contact.page');
+    Route::post('/send-contact', 'sendContact')->name('send.contact');
 });
 
 Route::name('admin.')->prefix('/admin')->group(function () {
     Route::controller(ContactController::class)->group(function () {
         Route::get('/all-contacts', 'getAllContacts')->name('all.contacts');
-        Route::get('/delete-contact/{contact}', 'deleteContact')->name('delete.contact');
-
         Route::get('/edit-contact/{contact}', 'editContactPage')->name('edit.contact.page');
         Route::put('/edit-contact/{contact}', 'updateContact')->name('update.contact');
+        Route::get('/delete-contact/{contact}', 'deleteContact')->name('delete.contact');
     });
 
     Route::controller(ProductController::class)->group(function () {
         Route::get('/all-products', 'getAllProducts')->name('all.products');
         Route::get('/add-product', 'addProductPage')->name('add.product.page');
         Route::post('/add-product', 'createProduct')->name('create.product');
-        Route::delete('/delete-product/{product}', 'deleteProduct')->name('delete.product');
-
         Route::get('/edit-product/{product}', 'editProductPage')->name('edit.product.page');
         Route::put('/edit-product/{product}', 'updateProduct')->name('update.product');
+        Route::delete('/delete-product/{product}', 'deleteProduct')->name('delete.product');
     });
 });

@@ -33,7 +33,7 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->amount }}</td>
-                <td>{{ $product->price }}</td>
+                <td>{{ number_format($product->price, 2) }}</td>
                 <td>{{ $product->image }}</td>
                 <td>{{ $product->created_at }}</td>
                 <td>{{ $product->updated_at }}</td>

@@ -34,7 +34,7 @@ class ContactController extends Controller
         //    'message' => $request->get('message')
         //]);
 
-        return redirect()->route('contactPage')->withSuccess('Contact is created.');
+        return redirect()->route('contact.page')->withSuccess('Contact is created.');
     }
 
     public function deleteContact($id)
@@ -60,9 +60,9 @@ class ContactController extends Controller
 
         $contact = ContactModel::findOrFail($id);
 
-        $contact->email = $request->email;
-        $contact->subject = $request->subject;
-        $contact->message = $request->message;
+        $contact->email = $request->get('email');
+        $contact->subject = $request->get('subject');
+        $contact->message = $request->get('message');
 
         $contact->save();
 

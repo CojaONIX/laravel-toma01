@@ -58,7 +58,7 @@ class ProductController extends Controller
     public function updateProduct(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:64',
+            'name' => 'required|string|max:64|unique:products,name,'.$id,
             'description' => 'required|string',
             'amount' => 'required|int|min:0',
             'price' => 'required|numeric|min:0',
@@ -67,11 +67,11 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->amount = $request->amount;
-        $product->price = $request->price;
-        $product->image = $request->image;
+        $product->name = $request->get('name');
+        $product->description = $request->get('description');
+        $product->amount = $request->get('amount');
+        $product->price = $request->get('price');
+        $product->image = $request->get('image');
 
         $product->save();
 
