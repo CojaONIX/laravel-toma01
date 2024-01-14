@@ -40,32 +40,29 @@ class ProductController extends Controller
 
     }
 
-    public function deleteProduct(Request $request, $id)
+    public function deleteProduct(Request $request, Product $product)
     {
 
-        $products = Product::findOrFail($id);
-        $products->delete();
+        $product->delete();
 
         return redirect()->route('admin.all.products')->withSuccess('Product is deleted.');
     }
 
-    public function editProductPage($id)
+    public function editProductPage(Product $product)
     {
-        $product = Product::findOrFail($id);
+
         return view('admin.editProduct', compact('product'));
     }
 
-    public function updateProduct(Request $request, $id)
+    public function updateProduct(Request $request, Product $product)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:64|unique:products,name,'.$id,
+            'name' => 'required|string|max:64|unique:products,name,'.$product->id,
             'description' => 'required|string',
             'amount' => 'required|int|min:0',
             'price' => 'required|numeric|min:0',
             'image' => 'nullable'
         ]);
-
-        $product = Product::findOrFail($id);
 
         $product->name = $request->get('name');
         $product->description = $request->get('description');

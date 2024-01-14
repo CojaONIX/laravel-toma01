@@ -37,28 +37,24 @@ class ContactController extends Controller
         return redirect()->route('contact.page')->withSuccess('Contact is created.');
     }
 
-    public function deleteContact($id)
+    public function deleteContact(ContactModel $contact)
     {
-        $contact = ContactModel::findOrFail($id);
         $contact->delete();
         return redirect()->back();
     }
 
-    public function editContactPage($id)
+    public function editContactPage(ContactModel $contact)
     {
-        $contact = ContactModel::findOrFail($id);
         return view('admin.editContact', compact('contact'));
     }
 
-    public function updateContact(Request $request, $id)
+    public function updateContact(Request $request, ContactModel $contact)
     {
         $validated = $request->validate([
             'email' => 'required|string|max:64',
             'subject' => 'required|string',
             'message' => 'required|string|min:5'
         ]);
-
-        $contact = ContactModel::findOrFail($id);
 
         $contact->email = $request->get('email');
         $contact->subject = $request->get('subject');
