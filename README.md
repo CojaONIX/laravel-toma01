@@ -24,4 +24,5 @@
 - [The Route List](https://laravel.com/docs/10.x/routing#the-route-list)
 - [Migrations](https://laravel.com/docs/10.x/migrations#introduction)
 - [Models](https://laravel.com/docs/10.x/eloquent#introduction)
+- [Laravel Breeze](https://laravel.com/docs/10.x/starter-kits#laravel-breeze)
 
