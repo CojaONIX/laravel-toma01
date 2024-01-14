@@ -19,6 +19,7 @@
 - php artisan make:migration add_role_to_users
 - php artisan migrate
 - php artisan make:model Product
+- php artisan make:middleware AdminCheck
 
 ## Exercises
 - [The Route List](https://laravel.com/docs/10.x/routing#the-route-list)
