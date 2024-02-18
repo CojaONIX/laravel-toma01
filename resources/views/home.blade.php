@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title', 'Home')
- 
+
 @section('content')
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
@@ -34,15 +34,32 @@
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste nam earum asperiores! Exercitationem quis impedit a repudiandae in voluptas porro dolorum unde non officiis facere maxime labore ea nisi placeat dolore tempore tempora, sint quibusdam, fugiat explicabo accusamus distinctio. Laudantium corrupti aperiam odio atque tempora cumque? Illo iure laudantium ex eligendi maxime ab quis beatae aut sint, magni necessitatibus atque fuga corporis quia? Ea architecto accusantium atque ullam laborum consequatur, id repellendus earum distinctio! Aspernatur ad odio blanditiis officia harum quod vero eaque, qui fugit, provident sed velit nam repellat dolor alias perspiciatis doloremque dolorem recusandae suscipit temporibus voluptates quo! Ea doloremque, aliquid iste fugiat quia, ex sed vero quasi nobis exercitationem magnam obcaecati esse id cupiditate! Dicta, aperiam ut.</p>
     <hr>
 
+    <h4>https://kurs.resenje.org/</h4>
+    <div class="d-flex">
+        <ul>
+        @foreach($eurCurse as $key => $value)
+            <ul>{{ $key }}: {{ $value }}</ul>
+        @endforeach
+        </ul>
+
+        <ul>
+            @foreach($usdCurse as $key => $value)
+                <ul>{{ $key }}: {{ $value }}</ul>
+            @endforeach
+        </ul>
+    </div>
+
+    <hr>
+
     <h2>Latest products</h2>
-    <p>{{ $currentDate }} {{ $currentTime }} 
+    <p>{{ $currentDate }} {{ $currentTime }}
     @if ($hour < 12)
         <span>Dobro jutro!</span>
     @else
         <span>Dobar dan!</span>
     @endif
     </p>
-    
+
     <hr>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
@@ -56,12 +73,12 @@
                         <img src="https://picsum.photos/id/{{ $product->id }}/300/100.jpg" class="card-img-top">
                     @endif
                 </div>
-    
+
                 <div class="card-body">
                     <h3 class="card-title">{{ $product->name }}</h3>
                     <p class="card-text">{{ $product->description }}</p>
                 </div>
-    
+
                 <div class="card-footer d-flex justify-content-between">
                     <h3>{{ number_format($product->price, 2) }}</h3>
                     <a href="#" class="btn btn-primary">Read more...</a>
@@ -69,6 +86,6 @@
             </div>
         </div>
         @endforeach
-    
+
     </div>
 @endsection

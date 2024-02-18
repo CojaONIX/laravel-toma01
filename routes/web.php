@@ -5,6 +5,7 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TestController;
 use App\Http\Middleware\AdminCheck;
 use Illuminate\Support\Facades\Route;
 
@@ -60,5 +61,8 @@ Route::middleware(['auth', AdminCheck::class])->name('admin.')->prefix('/admin')
         Route::delete('/delete-product/{product}', 'deleteProduct')->name('delete.product');
     });
 });
+
+Route::get('/test', [TestController::class, 'showTest'])->name('test.page');
+Route::post('/test', [TestController::class, 'ajaxGetTestData']);
 
 require __DIR__.'/auth.php';
