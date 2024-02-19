@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExchangeRate;
 use App\Services\ApiService;
 use App\Services\WeatherService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Http;
@@ -20,7 +23,7 @@ class TestController extends Controller
             'test1',
             'test2',
 
-            'getCurrencyCourse',
+            'getTodayCourses',
 
             'freeipapi.com',
 
@@ -39,9 +42,9 @@ class TestController extends Controller
                 return 'test2';
 
 
-            case('getCurrencyCourse'):
-                $apiService = new ApiService();
-                return $apiService->getCurrencyCourse($item);
+            case('getTodayCourses'):
+                //Artisan::call('courses:get');
+                return ExchangeRate::getTodayCourses();
 
             case('freeipapi.com'):
                 return Http::withoutVerifying()->get('https://freeipapi.com/api/json/');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExchangeRate;
 use App\Services\ApiService;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -17,10 +18,8 @@ class HomepageController extends Controller
         $products = Product::orderByDesc('id')->take(3)->get();
         //$products = Product::latest()->take(3)->get();
 
-        $apiService = new ApiService();
-        $eurCurse = $apiService->getCurrencyCourse('EUR');
-        $usdCurse = $apiService->getCurrencyCourse('USD');
+        $todayCourses = ExchangeRate::getTodayCourses();
 
-        return view('home', compact('currentDate', 'currentTime', 'hour', 'products', 'eurCurse', 'usdCurse'));
+        return view('home', compact('currentDate', 'currentTime', 'hour', 'products', 'todayCourses'));
     }
 }

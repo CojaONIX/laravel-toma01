@@ -35,20 +35,9 @@
     <hr>
 
     <h4>https://kurs.resenje.org/</h4>
-    <div class="d-flex">
-        <ul>
-        @foreach($eurCurse as $key => $value)
-            <ul>{{ $key }}: {{ $value }}</ul>
-        @endforeach
-        </ul>
-
-        <ul>
-            @foreach($usdCurse as $key => $value)
-                <ul>{{ $key }}: {{ $value }}</ul>
-            @endforeach
-        </ul>
-    </div>
-
+    @foreach($todayCourses as $course)
+        <p>{{ $course->currency }}: {{ $course->exchange_middle }}</p>
+    @endforeach
     <hr>
 
     <h2>Latest products</h2>
