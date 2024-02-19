@@ -2,18 +2,33 @@
 
 namespace App\Services;
 
+use App\Models\ExchangeRate;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class ApiService
 {
     public function getCurrencyCourse($currency)
     {
-        $url = $currency
-            ? 'https://kurs.resenje.org/api/v1/currencies/'.$currency.'/rates/today'
-            : 'https://kurs.resenje.org/api/v1/rates/today';
+        $todaysCurrency = ExchangeRate::where('currency', $currency)
+            ->whereDate('created_at', Carbon::now())
+            ->first();
 
-        $response = Http::withoutVerifying()->get($url);
+        if(!$todaysCurrency) {
+            $url = $currency
+                ? 'https://kurs.resenje.org/api/v1/currencies/' . $currency . '/rates/today'
+                : 'https://kurs.resenje.org/api/v1/rates/today';
 
-        return $response->json();
+            $response = Http::withoutVerifying()->get($url);
+
+            ExchangeRate::create([
+                'currency' => $currency,
+                'exchange_middle' => $response['exchange_middle']
+            ]);
+
+            return $response->json();
+        }
+
+        return $todaysCurrency;
     }
 }
