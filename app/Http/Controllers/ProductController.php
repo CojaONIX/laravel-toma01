@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -18,15 +19,8 @@ class ProductController extends Controller
         return view('admin.addProduct');
     }
 
-    public function createProduct(Request $request)
+    public function createProduct(ProductRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:64|unique:products',
-            'description' => 'required|string',
-            'amount' => 'required|int|min:0',
-            'price' => 'required|numeric|min:0',
-            'image' => 'nullable'
-        ]);
 
         Product::create([
             'name' => $request->get('name'),
@@ -54,16 +48,8 @@ class ProductController extends Controller
         return view('admin.editProduct', compact('product'));
     }
 
-    public function updateProduct(Request $request, Product $product)
+    public function updateProduct(ProductRequest $request, Product $product)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:64|unique:products,name,'.$product->id,
-            'description' => 'required|string',
-            'amount' => 'required|int|min:0',
-            'price' => 'required|numeric|min:0',
-            'image' => 'nullable'
-        ]);
-
         $product->name = $request->get('name');
         $product->description = $request->get('description');
         $product->amount = $request->get('amount');

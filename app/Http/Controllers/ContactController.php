@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use Illuminate\Http\Request;
 use App\Models\ContactModel;
 
@@ -18,21 +19,14 @@ class ContactController extends Controller
         return view('admin.allContacts', compact('contacts'));
     }
 
-    public function sendContact(Request $request)
+    public function sendContact(ContactRequest $request)
     {
-        $validated = $request->validate([
-            'email' => 'required|string|max:64',
-            'subject' => 'required|string',
-            'message' => 'required|string|min:5'
+
+        ContactModel::create([
+            'email' => $request->get('email'),
+            'subject' => $request->get('subject'),
+            'message' => $request->get('message')
         ]);
-
-        ContactModel::create($validated);
-
-        //ContactModel::create([
-        //    'email' => $request->get('email'),
-        //    'subject' => $request->get('subject'),
-        //    'message' => $request->get('message')
-        //]);
 
         return redirect()->route('contact.page')->withSuccess('Contact is created.');
     }
@@ -50,11 +44,6 @@ class ContactController extends Controller
 
     public function updateContact(Request $request, ContactModel $contact)
     {
-        $validated = $request->validate([
-            'email' => 'required|string|max:64',
-            'subject' => 'required|string',
-            'message' => 'required|string|min:5'
-        ]);
 
         $contact->email = $request->get('email');
         $contact->subject = $request->get('subject');
