@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
+    private $productRepo;
+    public function __construct()
+    {
+        $this->productRepo = new ProductRepository();
+    }
+
     public function getAllProducts()
     {
         $products = Product::all();
@@ -21,22 +28,13 @@ class ProductController extends Controller
 
     public function createProduct(ProductRequest $request)
     {
-
-        Product::create([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'amount' => $request->get('amount'),
-            'price' => $request->get('price'),
-            'image' => $request->get('image')
-        ]);
+        $this->productRepo->createNew($request);
 
         return redirect()->route('admin.all.products')->withSuccess('Product is created.');
-
     }
 
     public function deleteProduct(Request $request, Product $product)
     {
-
         $product->delete();
 
         return redirect()->route('admin.all.products')->withSuccess('Product is deleted.');
@@ -44,20 +42,12 @@ class ProductController extends Controller
 
     public function editProductPage(Product $product)
     {
-
         return view('admin.editProduct', compact('product'));
     }
 
     public function updateProduct(ProductRequest $request, Product $product)
     {
-        $product->name = $request->get('name');
-        $product->description = $request->get('description');
-        $product->amount = $request->get('amount');
-        $product->price = $request->get('price');
-        $product->image = $request->get('image');
-
-        $product->save();
-
+        $this->productRepo->editProduct($request, $product);
         return redirect()->route('admin.all.products')->withSuccess('Product ' . $product->id . ' is edited.');
     }
 }
