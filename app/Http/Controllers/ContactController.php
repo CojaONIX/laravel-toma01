@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
+use App\Repositories\ContactRepository;
 use Illuminate\Http\Request;
 use App\Models\ContactModel;
 
 class ContactController extends Controller
 {
+    private $contactRepo;
+    public function __construct()
+    {
+        $this->contactRepo = new ContactRepository();
+    }
+
     public function index()
     {
         return view('contact');
@@ -21,13 +28,7 @@ class ContactController extends Controller
 
     public function sendContact(ContactRequest $request)
     {
-
-        ContactModel::create([
-            'email' => $request->get('email'),
-            'subject' => $request->get('subject'),
-            'message' => $request->get('message')
-        ]);
-
+        $this->contactRepo->createNew($request);
         return redirect()->route('contact.page')->withSuccess('Contact is created.');
     }
 
@@ -44,13 +45,7 @@ class ContactController extends Controller
 
     public function updateContact(Request $request, ContactModel $contact)
     {
-
-        $contact->email = $request->get('email');
-        $contact->subject = $request->get('subject');
-        $contact->message = $request->get('message');
-
-        $contact->save();
-
+        $this->contactRepo->editContact($request, $contact);
         return redirect()->route('admin.all.contacts')->withSuccess('Contact ' . $contact->id . ' is edited.');
     }
 }

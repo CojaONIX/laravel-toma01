@@ -38,4 +38,9 @@ class ProductRepository
         $product->image = $request->get('image');
         $product->save();
     }
+
+    public function latestProducts($count)
+    {
+        return $this->productModel->latest()->take($count)->get();
+    }
 }
