@@ -3,33 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CartRequest;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class ShopController extends Controller
 {
+    private $productRepo;
+    public function __construct()
+    {
+        $this->productRepo = new ProductRepository();
+    }
+
     public function index()
     {
         $products = Product::all();
         return view('shop', compact('products'));
     }
 
+    public function cart()
+    {
+        return view('cart', [
+            'cart' => Session::get('products')
+        ]);
+    }
+
     public function addToCart(CartRequest $request)
     {
+        $product = $this->productRepo->getProductById($request->get('id'));
+        if($product->amount < $request->amount)
+        {
+            return redirect()->back()->withErrors(['amount' => 'Na stanju ima samo ' . $product->amount . ' komada']);
+        }
+
         Session::push('products', [
-            'product_id' => $request->id,
-            'amount' => $request->amount
+            'product_id' => $request->get('id'),
+            'product_name' => $product->name,
+            'amount' => $request->get('amount')
         ]);
 
         return redirect()->route('cart.page');
     }
 
-    public function cart()
+    public function emptyCart()
     {
-
-        return view('cart', [
-            'cart' => Session::get('products')
-        ]);
+        Session::forget('products');
+        return redirect()->back();
     }
+
+
 }

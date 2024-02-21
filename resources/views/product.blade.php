@@ -25,7 +25,7 @@
                 <form method="POST" action="{{ route('cart.add') }}">
                     @csrf
                     <input type="hidden" name="id" value="{{ $product->id }}">
-                    <label for="amount">Amount:</label>
+                    <label for="amount">Amount: (max: {{ $product->amount }})</label>
                     <input type="number" class="form-control" id="amount" name="amount" value="1">
                     @error('amount')
                     <span class="text-danger">{{ $message }}</span>
