@@ -33,11 +33,12 @@ Route::get('/shop', [ShopController::class, 'index'])->name('shop.page');
 Route::view('/about', 'about')->name('about.page');
 
 Route::controller(ContactController::class)
-    ->name('contact.')
-    ->group(function () {
-        Route::get('/contact', 'index')->name('page');
-        Route::post('/send-contact', 'sendContact')->name('send');
-    });
+        ->name('contact.')
+        ->prefix('/contact')
+        ->group(function () {
+            Route::get('/', 'index')->name('page');
+            Route::post('/send', 'sendContact')->name('send');
+        });
 
 Route::middleware(['auth', AdminCheck::class])
         ->name('admin.')
@@ -45,30 +46,32 @@ Route::middleware(['auth', AdminCheck::class])
         ->group(function () {
             Route::controller(ContactController::class)
                     ->name('contact.')
+                    ->prefix('/contact')
                     ->group(function () {
-                        Route::get('/all-contacts', 'getAllContacts')->name('all.page');
-                        Route::get('/delete-contact/{contact}', 'deleteContact')->name('delete');
+                        Route::get('/all', 'getAllContacts')->name('all.page');
+                        Route::get('/delete/{contact}', 'deleteContact')->name('delete');
 
-                        Route::prefix('/edit-contact/{contact}')->group(function () {
-                            Route::get('', 'editContactPage')->name('edit.page');
-                            Route::put('', 'updateContact')->name('update');
+                        Route::prefix('/edit/{contact}')->group(function () {
+                            Route::get('/', 'editContactPage')->name('edit.page');
+                            Route::put('/', 'updateContact')->name('update');
                         });
                     });
 
             Route::controller(ProductController::class)
                     ->name('product.')
+                    ->prefix('/product')
                     ->group(function () {
-                        Route::get('/all-products', 'getAllProducts')->name('all.page');
-                        Route::delete('/delete-product/{product}', 'deleteProduct')->name('delete');
+                        Route::get('/all', 'getAllProducts')->name('all.page');
+                        Route::delete('/delete/{product}', 'deleteProduct')->name('delete');
 
-                        Route::prefix('/add-product')->group(function () {
-                            Route::get('', 'addProductPage')->name('add.page');
-                            Route::post('', 'createProduct')->name('create');
+                        Route::prefix('/add')->group(function () {
+                            Route::get('/', 'addProductPage')->name('add.page');
+                            Route::post('/', 'createProduct')->name('create');
                         });
 
-                        Route::prefix('/edit-product/{product}')->group(function () {
-                            Route::get('', 'editProductPage')->name('edit.page');
-                            Route::put('', 'updateProduct')->name('update');
+                        Route::prefix('/edit/{product}')->group(function () {
+                            Route::get('/', 'editProductPage')->name('edit.page');
+                            Route::put('/', 'updateProduct')->name('update');
                         });
                     });
         });
