@@ -21,8 +21,9 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
+        $ignoreOnUpdate = isset($this->product->id) ? ',name,'.$this->product->id : '';
         return [
-            'name' => 'required|string|max:64|unique:products',
+            'name' => 'required|string|max:64|unique:products'.$ignoreOnUpdate,
             'description' => 'required|string',
             'amount' => 'required|int|min:0',
             'price' => 'required|numeric|min:0',
