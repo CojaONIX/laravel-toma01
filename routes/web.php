@@ -25,6 +25,7 @@ Route::get('/', [HomepageController::class, 'index'])->name('home.page');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.page');
 Route::get('/product/{product}', [ProductController::class, 'getProduct'])->name('product.page');
 Route::post('/cart/add', [ShopController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [ShopController::class, 'cart'])->name('cart.page');
 
 Route::view('/about', 'about')->name('about.page');
 

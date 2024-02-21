@@ -12,6 +12,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('shop.page') }}">Shop</a>
           </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('cart.page') }}">Cart</a>
+            </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('about.page') }}">About</a>
           </li>

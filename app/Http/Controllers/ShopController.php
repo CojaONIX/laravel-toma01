@@ -21,6 +21,12 @@ class ShopController extends Controller
             $request->id => $request->amount
         ]); // ???
 
-        return redirect()->back();
+        return redirect()->route('cart.page');
+    }
+
+    public function cart()
+    {
+        $products = json_encode(Session::get('products'));
+        return view('cart', compact('products'));
     }
 }
