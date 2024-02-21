@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-8">
-        <form method="POST" action="{{ route('admin.create.product') }}">
+        <form method="POST" action="{{ route('admin.product.create') }}">
             @csrf
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="name" name="name" placeholder="Name:" autofocus value="{{ old('name') }}">

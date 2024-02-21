@@ -23,8 +23,8 @@
                 <td>{{ $contact->created_at }}</td>
                 <td>{{ $contact->updated_at }}</td>
                 <td>
-                    <a href="{{ route('admin.delete.contact', ['contact' => $contact->id]) }}" class="btn btn-outline-danger">Delete</a>
-                    <a href="{{ route('admin.edit.contact.page', ['contact' => $contact->id]) }}" class="btn btn-outline-primary">Edit</a>
+                    <a href="{{ route('admin.contact.delete', ['contact' => $contact->id]) }}" class="btn btn-outline-danger">Delete</a>
+                    <a href="{{ route('admin.contact.edit.page', ['contact' => $contact->id]) }}" class="btn btn-outline-primary">Edit</a>
                 </td>
             </tr>
         @endforeach

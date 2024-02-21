@@ -26,8 +26,8 @@
               Admin
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{{ route('admin.all.contacts') }}">allContacts</a></li>
-              <li><a class="dropdown-item" href="{{ route('admin.all.products') }}">allProducts</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.contact.all.page') }}">allContacts</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.product.all.page') }}">allProducts</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{{ route('welcome') }}">Welcome</a></li>
             </ul>

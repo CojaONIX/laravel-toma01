@@ -28,41 +28,67 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-
 Route::get('/', [HomepageController::class, 'index'])->name('home.page');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.page');
 Route::view('/about', 'about')->name('about.page');
 
-Route::controller(ContactController::class)->group(function () {
-    Route::get('/contact', 'index')->name('contact.page');
-    Route::post('/send-contact', 'sendContact')->name('send.contact');
-});
-
-Route::middleware(['auth', AdminCheck::class])->name('admin.')->prefix('/admin')->group(function () {
-    Route::controller(ContactController::class)->group(function () {
-        Route::get('/all-contacts', 'getAllContacts')->name('all.contacts');
-        Route::get('/edit-contact/{contact}', 'editContactPage')->name('edit.contact.page');
-        Route::put('/edit-contact/{contact}', 'updateContact')->name('update.contact');
-        Route::get('/delete-contact/{contact}', 'deleteContact')->name('delete.contact');
+Route::controller(ContactController::class)
+    ->name('contact.')
+    ->group(function () {
+        Route::get('/contact', 'index')->name('page');
+        Route::post('/send-contact', 'sendContact')->name('send');
     });
 
-    Route::controller(ProductController::class)->group(function () {
-        Route::get('/all-products', 'getAllProducts')->name('all.products');
-        Route::get('/add-product', 'addProductPage')->name('add.product.page');
-        Route::post('/add-product', 'createProduct')->name('create.product');
-        Route::get('/edit-product/{product}', 'editProductPage')->name('edit.product.page');
-        Route::put('/edit-product/{product}', 'updateProduct')->name('update.product');
-        Route::delete('/delete-product/{product}', 'deleteProduct')->name('delete.product');
-    });
-});
+Route::middleware(['auth', AdminCheck::class])
+        ->name('admin.')
+        ->prefix('/admin')
+        ->group(function () {
+            Route::controller(ContactController::class)
+                    ->name('contact.')
+                    ->group(function () {
+                        Route::get('/all-contacts', 'getAllContacts')->name('all.page');
+                        Route::get('/delete-contact/{contact}', 'deleteContact')->name('delete');
 
-Route::get('/test', [TestController::class, 'showTest'])->name('test.page');
-Route::post('/test', [TestController::class, 'ajaxGetTestData']);
+                        Route::prefix('/edit-contact/{contact}')->group(function () {
+                            Route::get('', 'editContactPage')->name('edit.page');
+                            Route::put('', 'updateContact')->name('update');
+                        });
+                    });
+
+            Route::controller(ProductController::class)
+                    ->name('product.')
+                    ->group(function () {
+                        Route::get('/all-products', 'getAllProducts')->name('all.page');
+                        Route::delete('/delete-product/{product}', 'deleteProduct')->name('delete');
+
+                        Route::prefix('/add-product')->group(function () {
+                            Route::get('', 'addProductPage')->name('add.page');
+                            Route::post('', 'createProduct')->name('create');
+                        });
+
+                        Route::prefix('/edit-product/{product}')->group(function () {
+                            Route::get('', 'editProductPage')->name('edit.page');
+                            Route::put('', 'updateProduct')->name('update');
+                        });
+                    });
+        });
+
+Route::controller(TestController::class)
+        ->prefix('/test')
+        ->group(function () {
+            Route::get('/','showTest')->name('test.page');
+            Route::post('/', 'ajaxGetTestData');
+        });
+
+
+Route::middleware('auth')
+        ->controller(ProfileController::class)
+        ->name('profile.')
+        ->prefix('/profile')
+        ->group(function () {
+            Route::get('/', 'edit')->name('edit');
+            Route::patch('/', 'update')->name('update');
+            Route::delete('/', 'destroy')->name('destroy');
+        });
 
 require __DIR__.'/auth.php';

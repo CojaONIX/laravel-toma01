@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="col-6">
-        <form method="POST" action="{{ route('admin.update.contact', ['contact'=>$contact->id]) }}">
+        <form method="POST" action="{{ route('admin.contact.update', ['contact'=>$contact->id]) }}">
             @csrf
             @method('put')
             <div class="form-floating mb-3">

@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="col-8">
-        <form method="POST" action="{{ route('admin.update.product', ['product'=>$product->id]) }}">
+        <form method="POST" action="{{ route('admin.product.update', ['product'=>$product->id]) }}">
             @csrf
             @method('put')
             <div class="form-floating mb-3">

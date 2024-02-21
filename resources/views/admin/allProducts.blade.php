@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="d-flex justify-content-between align-items-start">
-        <a href="{{ route('admin.add.product.page') }}" class="btn btn-primary mb-5">New Product</a>
+        <a href="{{ route('admin.product.add.page') }}" class="btn btn-primary mb-5">New Product</a>
 
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -39,13 +39,13 @@
                 <td>{{ $product->updated_at }}</td>
                 <td>
                     <div class="d-flex justify-content-between">
-                        <form method="post" action="{{ route('admin.delete.product', ['product'=>$product->id]) }}">
+                        <form method="post" action="{{ route('admin.product.delete', ['product'=>$product->id]) }}">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-danger" type="submit">Delete</button>
                         </form>
 
-                        <a href="{{ route('admin.edit.product.page', ['product' => $product->id]) }}" class="btn btn-outline-primary">Edit</a>
+                        <a href="{{ route('admin.product.edit.page', ['product' => $product->id]) }}" class="btn btn-outline-primary">Edit</a>
                     </div>
                 </td>
             </tr>

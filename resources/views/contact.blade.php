@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-6">
-            <form method="POST" action="{{ route('send.contact') }}">
+            <form method="POST" action="{{ route('contact.send') }}">
                 @csrf
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="email" name="email" placeholder="Email:" autofocus value="{{ old('email') }}">

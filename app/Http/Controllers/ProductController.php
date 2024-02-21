@@ -30,14 +30,14 @@ class ProductController extends Controller
     {
         $this->productRepo->createNew($request);
 
-        return redirect()->route('admin.all.products')->withSuccess('Product is created.');
+        return redirect()->route('admin.product.all.page')->withSuccess('Product is created.');
     }
 
     public function deleteProduct(Product $product)
     {
         $product->delete();
 
-        return redirect()->route('admin.all.products')->withSuccess('Product is deleted.');
+        return redirect()->route('admin.product.all.page')->withSuccess('Product is deleted.');
     }
 
     public function editProductPage(Product $product)
@@ -48,6 +48,6 @@ class ProductController extends Controller
     public function updateProduct(ProductRequest $request, Product $product)
     {
         $this->productRepo->editProduct($request, $product);
-        return redirect()->route('admin.all.products')->withSuccess('Product ' . $product->id . ' is edited.');
+        return redirect()->route('admin.product.all.page')->withSuccess('Product ' . $product->id . ' is edited.');
     }
 }

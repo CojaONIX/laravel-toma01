@@ -46,6 +46,6 @@ class ContactController extends Controller
     public function updateContact(Request $request, ContactModel $contact)
     {
         $this->contactRepo->editContact($request, $contact);
-        return redirect()->route('admin.all.contacts')->withSuccess('Contact ' . $contact->id . ' is edited.');
+        return redirect()->route('admin.contact.all')->withSuccess('Contact ' . $contact->id . ' is edited.');
     }
 }
