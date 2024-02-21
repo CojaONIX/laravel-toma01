@@ -17,9 +17,10 @@ class ShopController extends Controller
 
     public function addToCart(CartRequest $request)
     {
-        Session::put('products', [
-            $request->id => $request->amount
-        ]); // ???
+        Session::push('products', [
+            'product_id' => $request->id,
+            'amount' => $request->amount
+        ]);
 
         return redirect()->route('cart.page');
     }
