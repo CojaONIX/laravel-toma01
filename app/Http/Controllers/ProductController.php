@@ -33,7 +33,7 @@ class ProductController extends Controller
         return redirect()->route('admin.all.products')->withSuccess('Product is created.');
     }
 
-    public function deleteProduct(Request $request, Product $product)
+    public function deleteProduct(Product $product)
     {
         $product->delete();
 
