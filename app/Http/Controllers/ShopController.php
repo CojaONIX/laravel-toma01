@@ -26,7 +26,9 @@ class ShopController extends Controller
 
     public function cart()
     {
-        $products = json_encode(Session::get('products'));
-        return view('cart', compact('products'));
+
+        return view('cart', [
+            'cart' => Session::get('products')
+        ]);
     }
 }

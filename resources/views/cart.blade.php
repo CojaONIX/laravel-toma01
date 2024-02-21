@@ -3,5 +3,9 @@
 @section('title', 'Cart')
 
 @section('content')
-    {{ $products }}
+
+    @foreach($cart as $id => $amount)
+        {{ $id }} - {{ $amount }}
+    @endforeach
+
 @endsection
