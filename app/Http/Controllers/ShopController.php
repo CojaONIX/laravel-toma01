@@ -24,8 +24,16 @@ class ShopController extends Controller
 
     public function cart()
     {
+        $products = null;
+        if(Session::get('products'))
+        {
+            $cartIDs = array_column(Session::get('products'), 'product_id');
+            $products = Product::whereIn('id', $cartIDs)->get();
+        }
+
         return view('cart', [
-            'cart' => Session::get('products')
+            'cart' => Session::get('products'),
+            'products' => $products
         ]);
     }
 
@@ -39,7 +47,6 @@ class ShopController extends Controller
 
         Session::push('products', [
             'product_id' => $request->get('id'),
-            'product_name' => $product->name,
             'amount' => $request->get('amount')
         ]);
 

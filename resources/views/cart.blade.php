@@ -18,17 +18,27 @@
         <tr>
             <th>product_id</th>
             <th>product_name</th>
+            <th>stock_amount</th>
             <th>amount</th>
+            <th>price</th>
+            <th>value</th>
         </tr>
 
         @isset($cart)
-        @foreach($cart as $item)
-            <tr>
-                <td>{{ $item['product_id'] }}</td>
-                <td>{{ $item['product_name'] }}</td>
-                <td>{{ $item['amount'] }}</td>
-            </tr>
-        @endforeach
+            @foreach($cart as $item)
+                @foreach($products as $product)
+                    @if(@$product->id == $item['product_id'])
+                    <tr>
+                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->amount }}</td>
+                        <td>{{ $item['amount'] }}</td>
+                        <td>{{ $product->price }}</td>
+                        <td>{{ $product->price * $item['amount'] }}</td>
+                    </tr>
+                    @endif
+                @endforeach
+            @endforeach
         @endisset
     </table>
 
