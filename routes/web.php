@@ -20,16 +20,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-})->name('welcome');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::get('/', [HomepageController::class, 'index'])->name('home.page');
+
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.page');
+Route::get('/product/{product}', [ProductController::class, 'getProduct'])->name('product.page');
+Route::post('/cart/add', [ShopController::class, 'addToCart'])->name('cart.add');
+
 Route::view('/about', 'about')->name('about.page');
 
 Route::controller(ContactController::class)
@@ -39,10 +35,6 @@ Route::controller(ContactController::class)
             Route::get('/', 'index')->name('page');
             Route::post('/send', 'sendContact')->name('send');
         });
-
-Route::controller(ProductController::class)->group(function () {
-    Route::get('/product/{product}', 'getProduct')->name('product.page');
-});
 
 Route::middleware(['auth', AdminCheck::class])
         ->name('admin.')
@@ -86,6 +78,16 @@ Route::controller(TestController::class)
             Route::get('/','showTest')->name('test.page');
             Route::post('/', 'ajaxGetTestData');
         });
+
+
+
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')

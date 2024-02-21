@@ -21,7 +21,18 @@
 
             <div class="card-footer d-flex justify-content-between">
                 <h3>{{ number_format($product->price, 2) }}</h3>
-                <a href="#" class="btn btn-primary">Add to chart</a>
+
+                <form method="POST" action="{{ route('cart.add') }}">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $product->id }}">
+                    <label for="amount">Amount:</label>
+                    <input type="number" class="form-control" id="amount" name="amount" value="1">
+                    @error('amount')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <button class="btn btn-outline-primary col-12 my-3" type="submit">Add to Cart</button>
+                </form>
+
             </div>
         </div>
     </div>

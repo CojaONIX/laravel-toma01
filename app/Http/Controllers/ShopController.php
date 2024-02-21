@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CartRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 
 class ShopController extends Controller
 {
@@ -11,5 +13,14 @@ class ShopController extends Controller
     {
         $products = Product::all();
         return view('shop', compact('products'));
+    }
+
+    public function addToCart(CartRequest $request)
+    {
+        Session::put('products', [
+            $request->id => $request->amount
+        ]); // ???
+
+        return redirect()->back();
     }
 }
