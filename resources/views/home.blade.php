@@ -3,6 +3,8 @@
 @section('title', 'Home')
 
 @section('content')
+    {{ \Illuminate\Support\Facades\Session::put('beforePage', 'home.page') }}
+
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -70,7 +72,7 @@
 
                 <div class="card-footer d-flex justify-content-between">
                     <h3>{{ number_format($product->price, 2) }}</h3>
-                    <a href="#" class="btn btn-primary">Read more...</a>
+                    <a href="{{ route('product.page', ['product' => $product->id]) }}" class="btn btn-primary">Read more...</a>
                 </div>
             </div>
         </div>

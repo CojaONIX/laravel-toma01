@@ -40,6 +40,10 @@ Route::controller(ContactController::class)
             Route::post('/send', 'sendContact')->name('send');
         });
 
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/product/{product}', 'getProduct')->name('product.page');
+});
+
 Route::middleware(['auth', AdminCheck::class])
         ->name('admin.')
         ->prefix('/admin')
