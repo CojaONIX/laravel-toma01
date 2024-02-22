@@ -6,12 +6,10 @@
 
     <div class="d-flex justify-content-between col-12 my-3">
         <a class="btn btn-outline-primary" href="{{ route('shop.page') }}">Back To Shop</a>
-        <div class="">
         <form method="POST" action="{{ route('cart.empty') }}">
             @csrf
             <button class="btn btn-outline-primary" type="submit">Empty Cart</button>
         </form>
-        </div>
     </div>
 
     <table class="table">
@@ -41,5 +39,13 @@
             @endforeach
         @endisset
     </table>
+
+    <form method="POST" action="{{ route('cart.order') }}">
+        @csrf
+        <button class="btn btn-outline-primary" type="submit">Order</button>
+    </form>
+    @error('amount')
+    <span class="text-danger">{{ $message }}</span>
+    @enderror
 
 @endsection

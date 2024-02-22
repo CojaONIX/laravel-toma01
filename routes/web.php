@@ -27,6 +27,7 @@ Route::get('/product/{product}', [ProductController::class, 'getProduct'])->name
 Route::post('/cart/add', [ShopController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/empty', [ShopController::class, 'emptyCart'])->name('cart.empty');
 Route::get('/cart', [ShopController::class, 'cart'])->name('cart.page');
+Route::post('/cart/order', [ShopController::class, 'orderCart'])->name('cart.order');
 
 Route::view('/about', 'about')->name('about.page');
 
