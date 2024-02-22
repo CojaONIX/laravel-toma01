@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('exchange_rates', function (Blueprint $table) {
             $table->id();
             $table->string('currency', 3);
-            $table->decimal('exchange_middle');
+            $table->unsignedDecimal('exchange_middle');
             $table->timestamps();
         });
     }
