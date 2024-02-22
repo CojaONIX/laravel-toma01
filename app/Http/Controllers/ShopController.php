@@ -73,11 +73,14 @@ class ShopController extends Controller
         {
             $cart = Session::get('products');
 
+            $cartIDs = array_column(Session::get('products'), 'product_id');
+            $products = Product::whereIn('id', $cartIDs)->get();
+
             $orderItems = [];
             $priceTotal = 0;
             foreach($cart as $item)
             {
-                $product = Product::where(['id' => $item['product_id']])->first();
+                $product = Product::where(['id' => $item['product_id']])->first(); // ???
                 if($product->amount < $item['amount'])
                 {
                     return redirect()->back()->withErrors(['amount' => 'Doslo je do promena kolicina i nekih proizvoda nema dovoljno na stanju.']);
@@ -85,7 +88,7 @@ class ShopController extends Controller
                 $orderItems[] = [
                     'product_id' => $product->id,
                     'amount' => $item['amount'],
-                    'price' => $product->price
+                    'price' => $item['amount'] * $product->price
                 ];
 
                 $priceTotal += $item['amount'] * $product->price; // Sta kad je doslo do promene cene???
@@ -100,6 +103,10 @@ class ShopController extends Controller
             {
                 $item['order_id'] = $orderId;
                 OrderItems::create($item);
+
+                $product = Product::where(['id' => $item['product_id']])->first(); // ???
+                $product->amount = $product->amount - $item['amount'];
+                $product->save();
             }
 
             Session::forget('products');
